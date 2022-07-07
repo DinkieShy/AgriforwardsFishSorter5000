@@ -2,8 +2,9 @@ from random import random as rand
 import os
 from torchvision.io import read_image
 from torchvision.transforms import RandomPerspective
+from torch.utils.data import Dataset
 
-class DataLoader(directory):
+class DataLoader(Dataset):
     def __init__(self, directory, augment=False):
         self.directory = directory
         self.augment = augment
@@ -15,8 +16,8 @@ class DataLoader(directory):
 
         for className in os.listdir(self.directory):
             self.labelEnum[className] = len(self.labelEnum)
-            for filename in os.listdir(self.directory + className):
-                if os.isfile(filename):
+            for filename in os.listdir(self.directory + "/" + className):
+                if os.path.isfile(filename):
                     self.images.append(filename)
                     self.labels.append(className)
 
