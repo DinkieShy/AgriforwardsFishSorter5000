@@ -24,7 +24,9 @@ class DataLoader(Dataset):
     def __len__(self):
         return len(self.images)
 
-    def __getItem__(index):
+    def __getitem__(self, index):
+		assert index < len(self.images), "index error when accessing dataset"
+        
         image_id = self.images[index]
         label = self.labels[index]
 
