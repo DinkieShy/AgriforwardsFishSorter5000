@@ -17,8 +17,8 @@ class DataLoader(Dataset):
         for className in os.listdir(self.directory):
             self.labelEnum[className] = len(self.labelEnum)
             for filename in os.listdir(self.directory + "/" + className):
-                if os.path.isfile(filename):
-                    self.images.append(filename)
+                if os.path.isfile(self.directory + "/" + className + "/" + filename):
+                    self.images.append(self.directory + "/" + className + "/" + filename)
                     self.labels.append(className)
 
     def __len__(self):
@@ -26,7 +26,7 @@ class DataLoader(Dataset):
 
     def __getitem__(self, index):
 		assert index < len(self.images), "index error when accessing dataset"
-        
+
         image_id = self.images[index]
         label = self.labels[index]
 
